@@ -202,7 +202,6 @@ void addEntry(int *roll, int *rating) {
     char ch[150];
 
     FILE *student_data;
-    FILE *rating_data;
     FILE *real_rating_data;
     student_data = fopen("Student.txt", "a+");
 
@@ -212,7 +211,6 @@ void addEntry(int *roll, int *rating) {
     }
 
     extractFromDB(no, rate);
-    rating_data = fopen("temp.txt", "w+");
     studentsWhoHaveRated(StudentsWhoHaveRated);
 
     do {
@@ -235,27 +233,21 @@ void addEntry(int *roll, int *rating) {
 
         rate[i] += *(rating + i);
         no[i] = no[i] + 1;
-        fprintf(rating_data, "%d ", no[i]);
     }
-
-    fprintf(rating_data, ".\n");
-
-    for (i = 0; i < 11; i++) {
-        fprintf(rating_data, "%d ", rate[i]);
-    }
-
     fprintf(student_data, ".\n");
-    fprintf(rating_data, ".");
-    real_rating_data = fopen("rating_data.txt", "w+");
-    while (!feof(rating_data)) {
-        i = 0;        ;
-        fgets(ch, 150, rating_data);
-        fprintf(real_rating_data,"%s",ch);
-    }
 
+    real_rating_data = fopen("rating_data.txt", "w");
+    for (i = 0; i < 11; i++) {
+        fprintf(real_rating_data, "%d ", no[i]);
+    }
+    fprintf(real_rating_data, ".\n");
+    for (i = 0; i < 11; i++) {
+        fprintf(real_rating_data, "%d ", rate[i]);
+    }
+    fprintf(real_rating_data, ".");
 
     fclose(student_data);
-    fclose(rating_data);
+    fclose(real_rating_data);
 }
 
 int countStudent() {
