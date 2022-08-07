@@ -199,9 +199,11 @@ int extractFromDB(int no[11], int rate[11]) {
 void addEntry(int *roll, int *rating) {
     int i, j = 0;
     int no[11], rate[11], StudentsWhoHaveRated[48];
+    char ch[150];
 
     FILE *student_data;
     FILE *rating_data;
+    FILE *real_rating_data;
     student_data = fopen("Student.txt", "a+");
 
     for (int i = 0; i < 11; i++) {
@@ -210,7 +212,7 @@ void addEntry(int *roll, int *rating) {
     }
 
     extractFromDB(no, rate);
-    rating_data = fopen("rating_data.txt", "w+");
+    rating_data = fopen("temp.txt", "w+");
     studentsWhoHaveRated(StudentsWhoHaveRated);
 
     do {
@@ -244,6 +246,13 @@ void addEntry(int *roll, int *rating) {
 
     fprintf(student_data, ".\n");
     fprintf(rating_data, ".");
+    real_rating_data = fopen("rating_data.txt", "w+");
+    while (!feof(rating_data)) {
+        i = 0;        ;
+        fgets(ch, 150, rating_data);
+        fprintf(real_rating_data,"%s",ch);
+    }
+
 
     fclose(student_data);
     fclose(rating_data);
