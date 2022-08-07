@@ -197,7 +197,7 @@ int extractFromDB(int no[11], int rate[11]) {
 }
 
 void addEntry(int *roll, int *rating) {
-    int i, j = 0;
+    int i, j = 0, count=0;
     int no[11], rate[11], StudentsWhoHaveRated[48];
     char ch[150];
 
@@ -214,10 +214,20 @@ void addEntry(int *roll, int *rating) {
     studentsWhoHaveRated(StudentsWhoHaveRated);
 
     do {
+        if(count > 3) printf("\nWhat the hellll.. Enter properly.. Why you spammin' brooo..!!");
         printf("\n\nKindly, Enter your roll no please (49-96): ");
         scanf("%d", roll);
         j = checkIfAlreadyRated(StudentsWhoHaveRated, *roll);
-        if (j == 1) printf("Sorry, but I think you have already entered your rating. Please let others rate now.");
+        if (j == 1) 
+        {
+            printf("Sorry, but I think you have already entered your rating. Please let others rate now.");
+            count++;
+        }
+        if (*roll < 49 || *roll > 96)
+        {
+            printf("You must belong to CD section with roll no between 49 and 96 to rate.");
+            count++;
+        }
     } while (*roll < 49 || *roll > 96 || j == 1);
     fprintf(student_data, "%d ", *roll);
 
@@ -271,7 +281,7 @@ void main()
     char loop;
     int i, j, k;
 
-    printf("Hey there, Nice to have you fellow pulchowian.\n I would be gladful if you told us your opinion in our teachers. Our faculty as of now stands as :\n");
+    printf("Hey there, Nice to have you fellow pulchowkian.\n I would be grateful if you tell us your opinion about our teachers. Our faculty as of now stands as :\n");
     printTeachersName3();
     while (choice != 2) {
         printf("\n\nDo you want to add your rating for our teachers: \n");

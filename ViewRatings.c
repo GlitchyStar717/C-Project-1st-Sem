@@ -276,10 +276,13 @@ void displayTeachersRating(int index) {
         printTeachersList();
         printf("OR Enter 717 to print the rating of all teachers. \n\n");
         scanf("%d", &index);
+        printf("\n\n");
+
         return displayTeachersRating(index);
     }
     i = 0;
     if (index == 717) {
+        printTeachersNameTab();
         while (arr[i][j] != 0) {
             for (j = 0; j < 11; j++) printf("%d\t", arr[i][j]);
             printf("\n");
@@ -291,12 +294,13 @@ void displayTeachersRating(int index) {
         }
         printf("Averages.\n");
     } else {
+        printf("\n\nThe rating to the teacher are : \n\n");
         while (arr[(i + 1)][j] != 0) {
             printf("%d\t", arr[i][(index - 1)]);
             printf("\n");
             i++;
         }
-        printf("Average is : %f.", arrAverage[index - 1]);
+        printf("With an average of : %f.\n\n", arrAverage[index - 1]);
     }
 }
 
