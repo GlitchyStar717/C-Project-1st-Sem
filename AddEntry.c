@@ -262,13 +262,13 @@ void addEntry(int *roll, int *rating) {
 
 int countStudent() {
     int i = 0;
-    char ch[150];
+    char ch[30];
     FILE *student_data;
-    student_data = fopen("Student.txt", "a+");
+    student_data = fopen("Student.txt", "r+");
 
     if (student_data == NULL) return 0;
     while (!feof(student_data)) {
-        fgets(ch, 150, student_data);
+        fgets(ch, 30, student_data);
         i++;
     }
     return (i - 1);
@@ -278,8 +278,7 @@ void main()
 
 {
     unsigned choice = 1;
-    char loop;
-    int i, j, k;
+    int i, j;
 
     printf("Hey there, Nice to have you fellow pulchowkian.\n I would be grateful if you tell us your opinion about our teachers. Our faculty as of now stands as :\n");
     printTeachersName3();

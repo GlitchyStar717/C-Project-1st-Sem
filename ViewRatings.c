@@ -98,7 +98,7 @@ int countStudent() {
 }
 
 int displayStudentsRating(int roll) {
-    int i, var, arr[11], column = 0, loop = 0, StudentsWhoHaveRated[48], len;
+    int i, var, arr[11], column = 0, loop = 0, StudentsWhoHaveRated[48], len,count=0;
     char ch[150], tmp;
     FILE *fp;
 
@@ -109,11 +109,13 @@ int displayStudentsRating(int roll) {
     if (fp == NULL) return 0;
 
     while ((roll > 96 || roll < 49) && roll != 717) {
+        if(count > 3) printf("\nWhat the hellll.. Why you spammin' brooo..!! Enter properly..");
         printf("We only have students from 49 to 96. Sorry to disappoint you. Re-enter your roll no among : \n");
         displayStudentsWhoHaveRated(StudentsWhoHaveRated);
         printf(" OR Enter 717 for printing ratings of all students.\n\n");
         scanf("%d", &roll);
         return displayStudentsRating(roll);
+        count++;
     }
 
     for (i = 0; i < len; i++) {
@@ -122,7 +124,9 @@ int displayStudentsRating(int roll) {
         }
     }
     if (roll == 717) loop = 1;
-    if (loop == 0) {
+    if (loop == 0) 
+    {
+        if(count > 3) printf("\nWhat the hellll.. Why you spammin' brooo..!! Enter properly..");
         printf("Our record does not find any student with the matching record. Please enter another roll no among : \n");
         displayStudentsWhoHaveRated(StudentsWhoHaveRated);
         printf("Enter 717 for printing ratings of all students.\n\n");
@@ -220,7 +224,7 @@ int extractAverage(float average[11]) {
         rate[i] = arr[1][i];
     }
     for (i = 0; i < 11; i++) {
-        average[i] = rate[i] / no[i];
+        average[i] = ((float)rate[i]) / ((float)no[i]);
     }
 
     fclose(fp);
@@ -266,17 +270,19 @@ void teachersRatingArray(int arr[48][11]) {
 }
 
 void displayTeachersRating(int index) {
-    int i = 0, arr[48][11], j = 0;
+    int i = 0, arr[48][11], j = 0,count=0;
     float arrAverage[11];
     teachersRatingArray(arr);
     extractAverage(arrAverage);
 
     while ((index > 11 || index < 1) && index != 717) {
+        if(count > 3) printf("\nWhat the hellll.. Why you spammin' brooo..!! Enter properly..");
         printf("We only have 11 teachers in our record. Please Re-Enter the index of the teacher among : \n");
         printTeachersList();
         printf("OR Enter 717 to print the rating of all teachers. \n\n");
         scanf("%d", &index);
         printf("\n\n");
+        count++;
 
         return displayTeachersRating(index);
     }
@@ -300,7 +306,7 @@ void displayTeachersRating(int index) {
             printf("\n");
             i++;
         }
-        printf("With an average of : %f.\n\n", arrAverage[index - 1]);
+        printf("With an average of : %.2f.\n\n", arrAverage[index - 1]);
     }
 }
 
@@ -312,6 +318,7 @@ void printStudentsRating() {
     displayStudentsWhoHaveRated(StudentsWhoHaveRated);
     printf("Enter 717 for printing ratings of all students.\n");
     scanf("%d", &roll);
+    printf("\n\n");
     displayStudentsRating(roll);
 }
 
@@ -322,6 +329,7 @@ void printTeachersRating() {
     printTeachersList();
     printf("Enter 717 for printing ratings of all teachers.\n");
     scanf("%d", &index);
+    printf("\n\n");
     displayTeachersRating(index);
 }
 
